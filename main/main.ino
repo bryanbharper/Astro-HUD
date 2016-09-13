@@ -22,6 +22,14 @@
 
 /* Create an OLED object */
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
+/*
+Option 2: must use the hardware SPI pins
+(for UNO thats sclk = 13 and sid = 11) and pin 10 must be
+an output. This is much faster - also required if you want
+to use the microSD card (see the image drawing example)
+Adafruit_SSD1351 tft = Adafruit_SSD1351(cs, dc, rst);
+*/
+
 
 /* Declare Globals */
 const int oxygen_sensor_pin = A0;
@@ -37,9 +45,9 @@ void setup() {
   // Establish communication with Arduino
   Serial.begin(9600);
   /*************************************
-   *    PIN SETUP 
+   *    PIN SETUP
    *************************************/
-    
+
 
   /*************************************
    *    OLED SETUP
@@ -65,7 +73,7 @@ void loop() {
   oxygen_level = (oxygen_sensor_value/1023.0)*100.0;   // Convert into percentage
 
   /*** Display Sensory Data on OLED ***/
-  oled.setCursor( oled.width()/2, oled.height()/2 ); 
+  oled.setCursor( oled.width()/2, oled.height()/2 );
   oled.setTextColor(RED);
   oled.setTextSize(5);
   oled.print((String)"Oxygen level: " + oxygen_level + (String)"%\n");
@@ -73,4 +81,3 @@ void loop() {
   /*** Display Sensory Data on Serial  ***/
   Serial.print((String)"Oxygen level: " + oxygen_level + (String)"%\n");
 }
-
