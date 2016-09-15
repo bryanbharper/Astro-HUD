@@ -32,7 +32,8 @@ const int oxygen_sensor_pin = A0;
 int oxygen_sensor_value;
 double oxygen_level;
 double old_oxygen_level;
-
+int oxygen_cursor_x;
+int oxygen_cursor_y;
 
 /*************************************
 *
@@ -69,21 +70,19 @@ void loop() {
 
   /* Only refresh display if a value has changed. */
   if( oxygen_level != old_oxygen_level ){
-    /****************
-      TODO: Refresh ONLY the numerical portion of the display string.
-      NOTE: Instead of hard-coding cursor, can we get the cursor value and
-      move it relative to current position? This will save us some head-aches
-      down the road.
-    ****************/
     oled.setTextColor(BLACK);
-    oled.setCursor( 20, oled.height()/2 );
-    oled.print((String)"Oxygen: " + (int)old_oxygen_level + (String)"%\n");
+    oled.setCursor( oxygen_cursor_x, oxygen_cursor_y );
+    oled.print((int)old_oxygen_level);
    }
 
   /*** Display Sensory Data on OLED ***/
   oled.setCursor( 20, oled.height()/2 );
   oled.setTextColor(RED);
-  oled.print((String)"Oxygen: " + (int)oxygen_level + (String)"%\n");
+  oled.print((String)"Oxygen: ");
+  oxygen_cursor_x = getCursorX(); // For clearing value
+  oxygen_cursor_y = getCursorY(); // For clearing value
+  oled.print((int)oxygen_level);
+  oled.print((String)"%\n");
 
   /*** Store old oxygen_level ***/
   old_oxygen_level = oxygen_level;
