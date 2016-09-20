@@ -79,8 +79,8 @@ void loop() {
   oled.setCursor( 20, oled.height()/2 );
   oled.setTextColor(RED);
   oled.print((String)"Oxygen: ");
-  oxygen_cursor_x = getCursorX(); // For clearing value
-  oxygen_cursor_y = getCursorY(); // For clearing value
+  oxygen_cursor_x = oled.getCursorX(); // For clearing value
+  oxygen_cursor_y = oled.getCursorY(); // For clearing value
   oled.print((int)oxygen_level);
   oled.print((String)"%\n");
 
