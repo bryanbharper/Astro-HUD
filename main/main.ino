@@ -1,12 +1,15 @@
-/*** Assign Pins ***/
+/*************************************
+* SSD1351  Pin Assignments
+*************************************/
 #define sclk 2
 #define mosi 3
 #define dc   4
 #define cs   5
 #define rst  6
 
-
-/*** Color definitions ***/
+/*************************************
+* Color Definitions
+*************************************/
 #define  BLACK           0x0000
 #define BLUE            0x001F
 #define RED             0xF800
@@ -16,18 +19,23 @@
 #define YELLOW          0xFFE0
 #define WHITE           0xFFFF
 
-
-/*** Include Libraries ***/
+/*************************************
+* Include Libraries 
+*************************************/
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1351.h>
-#include <SPI.h>
-#include <SD.h>
 #include <math.h>
+#include <Sensor.h>
 
-/* Create an OLED object */
+/*************************************
+* Create Objects 
+*************************************/
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
+//Sensor example(13);
 
-/* Declare Globals */
+/*************************************
+* Declare Globals 
+*************************************/
 const int oxygen_sensor_pin = A0;
 int oxygen_sensor_value;
 double oxygen_level;
@@ -72,7 +80,7 @@ void loop() {
   if( oxygen_level != old_oxygen_level ){
     oled.setTextColor(BLACK);
     oled.setCursor( oxygen_cursor_x, oxygen_cursor_y );
-    oled.print((int)old_oxygen_level);
+    oled.print((int)old_oxygen_level+(String)"%\n");
    }
 
   /*** Display Sensory Data on OLED ***/
@@ -81,8 +89,7 @@ void loop() {
   oled.print((String)"Oxygen: ");
   oxygen_cursor_x = oled.getCursorX(); // For clearing value
   oxygen_cursor_y = oled.getCursorY(); // For clearing value
-  oled.print((int)oxygen_level);
-  oled.print((String)"%\n");
+  oled.print((int)oxygen_level+(String)"%\n");
 
   /*** Store old oxygen_level ***/
   old_oxygen_level = oxygen_level;
