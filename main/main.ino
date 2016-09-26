@@ -20,7 +20,7 @@
 #define WHITE           0xFFFF
 
 /*************************************
-* Include Libraries 
+* Include Libraries
 *************************************/
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1351.h>
@@ -28,13 +28,13 @@
 #include <Sensor.h>
 
 /*************************************
-* Create Objects 
+* Create Objects
 *************************************/
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
 //Sensor example(13);
 
 /*************************************
-* Declare Globals 
+* Declare Globals
 *************************************/
 const int oxygen_sensor_pin = A0;
 int oxygen_sensor_value;
@@ -94,3 +94,5 @@ void loop() {
   /*** Store old oxygen_level ***/
   old_oxygen_level = oxygen_level;
 }
+
+// Blah blah blah
