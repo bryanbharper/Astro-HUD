@@ -1,0 +1,63 @@
+/****************************
+  Priority System
+    Volunteer: Fransisco
+    Priority: Med
+    Complete: False
+****************************/
+- Conceptual / Logical design (how to quantify, upgrade, downgrade, etc.)
+- Implement in code
+
+
+
+/****************************
+  Mid-Level State
+    Volunteer:
+    Priority: Med
+    Complete: False
+****************************/
+- Conceptual / Logical design
+- Implement in code
+
+
+
+/****************************
+Display Appearance
+    Volunteer:
+    Priority: High
+    Complete: False
+****************************/
+- Draw some shit
+  - Minimal State
+  - Danger Zone (OH SHIT! state)
+  - (potential) Mid-Level state
+  *Make it puurrdy.
+
+
+
+/****************************
+Encapsulate (current) display code (in main.ino) into user-friendly functions
+(right now its all bare and naked in the open, gross)
+    Volunteer:
+    Priority: High
+    Complete: False
+****************************/
+- Move as much functionality as possible to back-end
+- Remainder into a Display library
+
+
+
+
+/****************************
+Config file (for eventual user-interface)
+    Volunteer:
+    Priority: Low / Future
+    Complete: False
+****************************/
+
+
+
+
+
+
+
+...that's all I can think of just now :)
