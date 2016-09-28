@@ -88,5 +88,12 @@ void loop() {
 
     old_oxygen_level = oxygen.display_value;
   }
+  else
+  {
+    oled.setCursor( 20, oled.height()/2 );
+    oled.setTextColor(BLACK);
+    oled.print((String)"Oxygen: ");
+    oled.print((int)old_oxygen_level+(String)"%\n");
+  }
 
 }
