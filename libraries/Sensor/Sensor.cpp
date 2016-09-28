@@ -6,7 +6,7 @@
 #include "Arduino.h"
 #include "Sensor.h"
 
-Sensor::Sensor(int Pin, int Hi_thresh, int Lo_thresh, double Conv_coef, double Conv_offset)
+Sensor::Sensor(int Pin, float Hi_thresh, float Lo_thresh, float Conv_coef, float Conv_offset)
 {
   pinMode(pin, INPUT);
   pin = Pin;
