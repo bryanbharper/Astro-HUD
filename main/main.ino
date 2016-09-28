@@ -94,6 +94,3 @@ void loop() {
   /*** Store old oxygen_level ***/
   old_oxygen_level = oxygen_level;
 }
-
-
-// Twiggy diggy doop.
