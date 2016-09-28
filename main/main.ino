@@ -31,15 +31,13 @@
 * Create Objects
 *************************************/
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
-//Sensor example(13);
+Sensor oxygen = Sensor(A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
 
 /*************************************
 * Declare Globals
 *************************************/
-const int oxygen_sensor_pin = A0;
-int oxygen_sensor_value;
-double oxygen_level;
-double old_oxygen_level;
+
+float old_oxygen_level;
 int oxygen_cursor_x;
 int oxygen_cursor_y;
 
@@ -72,32 +70,23 @@ void setup() {
 *************************************/
 void loop() {
 
-  /**** Sensor Data ****/
-  oxygen_sensor_value = analogRead(oxygen_sensor_pin); // Read Oxygen Sensor
-  oxygen_level = round( (oxygen_sensor_value/1023.0)*100.0 );   // Convert into percentage
+  oxygen.update();
+  if( oxygen.display_me ){
 
-  /* Only refresh display if a value has changed. */
-  if( oxygen_level != old_oxygen_level ){
-    oled.setTextColor(BLACK);
-    oled.setCursor( oxygen_cursor_x, oxygen_cursor_y );
-    oled.print((int)old_oxygen_level+(String)"%\n");
-   }
+    if( oxygen.display_value != old_oxygen_level ){
+      oled.setTextColor(BLACK);
+      oled.setCursor( oxygen_cursor_x, oxygen_cursor_y );
+      oled.print((int)old_oxygen_level+(String)"%\n");
+     }
 
-  /*** Display Sensory Data on OLED ***/
-  oled.setCursor( 20, oled.height()/2 );
-  oled.setTextColor(RED);
-  oled.print((String)"Oxygen: ");
-  oxygen_cursor_x = oled.getCursorX(); // For clearing value
-  oxygen_cursor_y = oled.getCursorY(); // For clearing value
-  oled.print((int)oxygen_level+(String)"%\n");
+    oled.setCursor( 20, oled.height()/2 );
+    oled.setTextColor(RED);
+    oled.print((String)"Oxygen: ");
+    oxygen_cursor_x = oled.getCursorX(); // For clearing value
+    oxygen_cursor_y = oled.getCursorY(); // For clearing value
+    oled.print((int)oxygen.display_value+(String)"%\n");
 
-  /*** Store old oxygen_level ***/
-  old_oxygen_level = oxygen_level;
+    old_oxygen_level = oxygen.display_value;
+  }
+
 }
-<<<<<<< HEAD
-
-
-// Twiggy diggy doop.
-//My verses still be serving
-=======
->>>>>>> origin/master
