@@ -55,6 +55,22 @@ Config file (for eventual user-interface)
 ****************************/
 
 
+/****************************
+Clock Object
+    Volunteer:
+    Priority: High
+    Complete: False
+****************************/
+
+
+
+/****************************
+Battery Level Object 
+    Volunteer:
+    Priority: High
+    Complete: False
+****************************/
+
 
 
 
