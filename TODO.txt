@@ -11,7 +11,7 @@
 
 /****************************
   Mid-Level State
-    Volunteer:
+    Volunteer: Leo
     Priority: Med
     Complete: False
 ****************************/
@@ -57,7 +57,7 @@ Config file (for eventual user-interface)
 
 /****************************
 Clock Object
-    Volunteer:
+    Volunteer: Leo
     Priority: High
     Complete: False
 ****************************/
