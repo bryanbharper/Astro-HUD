@@ -14,6 +14,7 @@ Sensor::Sensor(int Pin, float Hi_thresh, float Lo_thresh, float Conv_coef, float
   lo_thresh = Lo_thresh;
   conv_coef = Conv_coef;
   display_me = false;
+  display_name = "name"; // Default Sensor Name 
 }
 
 void Sensor::convert()

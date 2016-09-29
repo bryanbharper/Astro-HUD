@@ -22,6 +22,7 @@ class Sensor
     int pin;
     int sensor_read;
     float display_value;
+    (String) display_name;
 
   private:
     // Tumble weed
