@@ -22,7 +22,7 @@
 
 /****************************
 Display Appearance
-    Volunteer:
+    Volunteer: Bryan
     Priority: High
     Complete: False
 ****************************/
@@ -37,7 +37,7 @@ Display Appearance
 /****************************
 Encapsulate (current) display code (in main.ino) into user-friendly functions
 (right now its all bare and naked in the open, gross)
-    Volunteer:
+    Volunteer: Bryan
     Priority: High
     Complete: False
 ****************************/
