@@ -1,6 +1,6 @@
 /****************************
   Priority System
-    Volunteer: San Francisco
+    Volunteer: San Francisco, Bryan
     Priority: Med
     Complete: False
 ****************************/
@@ -66,7 +66,7 @@ Clock Object
 
 /****************************
 Battery Level Object
-    Volunteer: Olivia
+    Volunteer: Olivia, Bryan
     Priority: High
     Complete: False
 ****************************/
