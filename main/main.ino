@@ -24,7 +24,6 @@
 *************************************/
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1351.h>
-#include <math.h>
 #include <Sensor.h>
 
 /*************************************
