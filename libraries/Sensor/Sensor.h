@@ -19,8 +19,8 @@ class Sensor
     float lo_thresh;
     float conv_coef;
     float conv_offset;
-    int pin;
-    int sensor_read;
+    unsigned short int pin;
+    unsigned short int sensor_read;
     float display_value;
     String display_name;
     // Methods

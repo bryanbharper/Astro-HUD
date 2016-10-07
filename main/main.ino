@@ -10,7 +10,7 @@
 /*************************************
 * Color Definitions
 *************************************/
-#define  BLACK           0x0000
+#define  BLACK          0x0000
 #define BLUE            0x001F
 #define RED             0xF800
 #define GREEN           0x07E0
@@ -37,8 +37,8 @@ Sensor oxygen = Sensor("Ox: ",A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
 *************************************/
 
 float old_oxygen_level;
-int oxygen_cursor_x;
-int oxygen_cursor_y;
+unsigned short int oxygen_cursor_x;
+unsigned short int oxygen_cursor_y;
 
 /*************************************
 *
