@@ -32,7 +32,8 @@ Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Con
 
 void Sensor::convert()
 {
-  display_value = conv_coef * sensor_read + conv_offset;
+  // Convert to relevnt units. Limit to two decimal places (to limit oled flashing).
+  display_value = roundf( (conv_coef * sensor_read + conv_offset) * 100) / 100;
 }
 
 void Sensor::check_thresh()
