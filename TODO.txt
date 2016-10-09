@@ -1,6 +1,6 @@
 /****************************
   Priority System
-    Volunteer: Fransisco
+    Volunteer: San Francisco, Bryan
     Priority: Med
     Complete: False
 ****************************/
@@ -11,7 +11,7 @@
 
 /****************************
   Mid-Level State
-    Volunteer: Leo
+    Volunteer: Leo/Kv
     Priority: Med
     Complete: False
 ****************************/
@@ -22,7 +22,7 @@
 
 /****************************
 Display Appearance
-    Volunteer: Bryan
+    Volunteer: Olivia
     Priority: High
     Complete: False
 ****************************/
@@ -57,7 +57,7 @@ Config file (for eventual user-interface)
 
 /****************************
 Clock Object
-    Volunteer: Leo
+    Volunteer: Leo/ Kv
     Priority: High
     Complete: False
 ****************************/
@@ -66,7 +66,11 @@ Clock Object
 
 /****************************
 Battery Level Object
+<<<<<<< HEAD
     Volunteer:
+=======
+    Volunteer: Olivia, Bryan
+>>>>>>> origin/master
     Priority: High
     Complete: False
 ****************************/

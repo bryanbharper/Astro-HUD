@@ -10,7 +10,7 @@
 /*************************************
 * Color Definitions
 *************************************/
-#define  BLACK           0x0000
+#define  BLACK          0x0000
 #define BLUE            0x001F
 #define RED             0xF800
 #define GREEN           0x07E0
@@ -24,22 +24,20 @@
 *************************************/
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1351.h>
-#include <math.h>
 #include <Sensor.h>
 
 /*************************************
 * Create Objects
 *************************************/
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
-Sensor oxygen = Sensor(A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
-
+Sensor oxygen = Sensor("Ox: ",A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
 /*************************************
 * Declare Globals
 *************************************/
 
 float old_oxygen_level;
-int oxygen_cursor_x;
-int oxygen_cursor_y;
+unsigned short int oxygen_cursor_x;
+unsigned short int oxygen_cursor_y;
 
 /*************************************
 *
@@ -81,7 +79,7 @@ void loop() {
 
     oled.setCursor( 20, oled.height()/2 );
     oled.setTextColor(RED);
-    oled.print((String)"Oxygen: ");
+    oled.print( oxygen.display_name );
     oxygen_cursor_x = oled.getCursorX(); // For clearing value
     oxygen_cursor_y = oled.getCursorY(); // For clearing value
     oled.print((int)oxygen.display_value+(String)"%\n");
@@ -92,8 +90,9 @@ void loop() {
   {
     oled.setCursor( 20, oled.height()/2 );
     oled.setTextColor(BLACK);
-    oled.print((String)"Oxygen: ");
+    oled.print( oxygen.display_name );
     oled.print((int)old_oxygen_level+(String)"%\n");
   }
 
 }
+// Comment blergsss
