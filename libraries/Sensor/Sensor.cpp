@@ -19,12 +19,16 @@ Sensor::Sensor(int Pin, float Hi_thresh, float Lo_thresh, float Conv_coef, float
 }
 
 // Constructor with Name
-Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Conv_coef, float Conv_offset)
+Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,  float Conv_coef, float Conv_offset)
 {
   pinMode(pin, INPUT);
   pin = Pin;
   hi_thresh = Hi_thresh;
   lo_thresh = Lo_thresh;
+  hi_bound = Hi_bound;
+  lo_bound = Lo_bound;
+  priority = 0;
+  priority_offset = 0;
   conv_coef = Conv_coef;
   display_me = false;
   display_name = name;
@@ -51,4 +55,17 @@ void Sensor::update()
   sensor_read = analogRead(pin);
   convert();
   check_thresh();
+}
+
+void Sensor::calc_priority()
+{
+  if( (display_value < hi_thresh) && ( display_value > lo_thresh) ){
+    priority = priority_offset;
+  }
+  else if( display_value > hi_thresh){
+    priority = abs( display_value - hi_thresh) / abs(hi_bound - hi_thresh) + priority_offset;
+  }
+  else{
+    priority = abs(lo_thresh - display_value) / abs(lo_thresh - hi_bound) + priority_offset;
+  }
 }
