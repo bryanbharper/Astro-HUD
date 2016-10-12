@@ -30,7 +30,8 @@
 * Create Objects
 *************************************/
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
-Sensor oxygen = Sensor("Ox: ",A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
+Sensor oxygen = Sensor("Ox: ",A1, 90.0, 50.0, 100.0, 0.0, 100.0 / 1023.0, 0.0);
+Sensor co2 = Sensor("CO2: ",A0, 500.0, 300.0, 800.0, 200.0, 600.0 / 1023.0, 200.0);
 /*************************************
 * Declare Globals
 *************************************/
@@ -38,6 +39,9 @@ Sensor oxygen = Sensor("Ox: ",A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
 float old_oxygen_level;
 unsigned short int oxygen_cursor_x;
 unsigned short int oxygen_cursor_y;
+float old_co2_level;
+unsigned short int co2_cursor_x;
+unsigned short int co2_cursor_y;
 
 /*************************************
 *
@@ -93,6 +97,34 @@ void loop() {
     oled.print( oxygen.display_name );
     oled.print((int)old_oxygen_level+(String)"%\n");
   }
+
+
+  co2.update();
+  if( co2.display_me ){
+
+    if( co2.display_value != old_co2_level ){
+      oled.setTextColor(BLACK);
+      oled.setCursor( co2_cursor_x, co2_cursor_y );
+      oled.print((int)old_co2_level+(String)"\n");
+     }
+
+    oled.setCursor( 20, oled.height()/4 );
+    oled.setTextColor(RED);
+    oled.print( co2.display_name );
+    co2_cursor_x = oled.getCursorX(); // For clearing value
+    co2_cursor_y = oled.getCursorY(); // For clearing value
+    oled.print((int)co2.display_value+(String)"\n");
+
+    old_co2_level = co2.display_value;
+  }
+  else
+  {
+    oled.setCursor( 20, oled.height()/4 );
+    oled.setTextColor(BLACK);
+    oled.print( co2.display_name );
+    oled.print((int)old_co2_level+(String)"\n");
+  }
+
 
 }
 // Comment blergsss
