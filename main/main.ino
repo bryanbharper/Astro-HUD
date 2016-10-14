@@ -27,10 +27,19 @@
 #include <Sensor.h>
 
 /*************************************
-* Create Objects
+* Sensor Objects
 *************************************/
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
-Sensor oxygen = Sensor("Ox: ",A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
+Sensor oxygen = Sensor("Ox: ",A0, 90.0, 50.0, 100.0, 0.0, 100.0 / 1023.0, 0.0);
+Sensor co2 = Sensor("CO2: ",A1, 500.0, 300.0, 800.0, 200.0, 600.0 / 1023.0, 200.0);
+Sensor pressure = Sensor("X: ",A2, 700.0, 500.0, 1023, 0, 1, 0);
+
+/*************************************
+* Priority Slots / Coordinates
+*************************************/
+unsigned short int sensor_x = 20;
+int priority_y [7] = { 16*2, 16*3, 16*4, 16*5, 16*6, 16*7, 16*8};
+
 /*************************************
 * Declare Globals
 *************************************/
@@ -38,6 +47,9 @@ Sensor oxygen = Sensor("Ox: ",A0, 100.0, 50.0, 100.0 / 1023.0, 0.0);
 float old_oxygen_level;
 unsigned short int oxygen_cursor_x;
 unsigned short int oxygen_cursor_y;
+float old_co2_level;
+unsigned short int co2_cursor_x;
+unsigned short int co2_cursor_y;
 
 /*************************************
 *
@@ -75,10 +87,10 @@ void loop() {
       oled.setTextColor(BLACK);
       oled.setCursor( oxygen_cursor_x, oxygen_cursor_y );
       oled.print((int)old_oxygen_level+(String)"%\n");
-     }
+    }
 
-    oled.setCursor( 20, oled.height()/2 );
-    oled.setTextColor(RED);
+    oled.setCursor( sensor_x, priority_y[0] );
+    oled.setTextColor(WHITE);
     oled.print( oxygen.display_name );
     oxygen_cursor_x = oled.getCursorX(); // For clearing value
     oxygen_cursor_y = oled.getCursorY(); // For clearing value
@@ -88,11 +100,39 @@ void loop() {
   }
   else
   {
-    oled.setCursor( 20, oled.height()/2 );
+    oled.setCursor( sensor_x, priority_y[0] );
     oled.setTextColor(BLACK);
     oled.print( oxygen.display_name );
     oled.print((int)old_oxygen_level+(String)"%\n");
   }
+
+
+  co2.update();
+  if( co2.display_me ){
+
+    if( co2.display_value != old_co2_level ){
+      oled.setTextColor(BLACK);
+      oled.setCursor( co2_cursor_x, co2_cursor_y );
+      oled.print((int)old_co2_level+(String)"\n");
+     }
+
+    oled.setCursor( sensor_x, priority_y[1]);
+    oled.setTextColor(WHITE);
+    oled.print( co2.display_name );
+    co2_cursor_x = oled.getCursorX(); // For clearing value
+    co2_cursor_y = oled.getCursorY(); // For clearing value
+    oled.print((int)co2.display_value+(String)"\n");
+
+    old_co2_level = co2.display_value;
+  }
+  else
+  {
+    oled.setCursor( sensor_x, priority_y[1]);
+    oled.setTextColor(BLACK);
+    oled.print( co2.display_name );
+    oled.print((int)old_co2_level+(String)"\n");
+  }
+
 
 }
 // Comment blergsss
