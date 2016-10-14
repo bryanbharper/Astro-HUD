@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+/*************************************
+* SSD1351  Pin Assignments
+*************************************/
+#define sclk 2
+#define mosi 3
+#define dc   4
+#define cs   5
+#define rst  6
+
+/*************************************
+* Color Definitions
+*************************************/
+#define  BLACK          0x0000
+#define BLUE            0x001F
+#define RED             0xF800
+#define GREEN           0x07E0
+#define CYAN            0x07FF
+#define MAGENTA         0xF81F
+#define YELLOW          0xFFE0
+#define WHITE           0xFFFF
+
+/*************************************
+* Include Libraries
+*************************************/
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1351.h>
+void main()
+void setup() {
+  Serial.begin(9600); // I think this can be removed...
+  /*************************************
+   *    Arduino PIN SETUP
+   *************************************/
+
+
+  /*************************************
+   *    OLED SETUP
+   *************************************/
+  oled.begin(); // Start up OLED
+  oled.fillScreen(BLACK); // Clear the screen
+  oled.setTextSize(1); // Set default text size
+}
+
+void loop{
+
+{ int h,m,s; h=0; m=0; s=0; while(1) {
+
+     if(s>59) {oled.setCursor( 20, oled.height()/2 );
+     oled.setTextColor(BLACK);
+     oled.print((int)s+(String)"%\n");
+     m=m+1; s=0;
+     oled.setCursor( 20, oled.height()/2 );
+     oled.setTextColor(RED);
+     oled.print((int)s+(String)"%\n");}
+
+      if(m>59) {oled.setCursor( 22, oled.height()/2 );
+      oled.setTextColor(BLACK);
+      oled.print((int)m+(String)"%\n");
+      h=h+1; m=0;
+      oled.setCursor( 22, oled.height()/2 );
+      oled.setTextColor(RED);
+      oled.print((int)m+(String)"%\n"); }
+
+      if(h>11) {oled.setCursor( 24, oled.height()/2 );
+      oled.setTextColor(BLACK);
+      oled.print((int)h+(String)"%\n");
+      h=0; m=0; s=0;
+      oled.setCursor( 24, oled.height()/2 );
+      oled.setTextColor(RED);
+      oled.print((int)h+(String)"%\n"); }
+
+      delay(1000);
+      s=s+1;
+    /*  clrscr();
+      printf("\n DIGITAL CLOCK");
+      printf("\n HOUR:MINUTE:SECOND");
+      printf("\n%d:%d:%d",h,m,s);
+*/
+}
+
+}
+}

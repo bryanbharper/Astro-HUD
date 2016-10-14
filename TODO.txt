@@ -66,10 +66,15 @@ Clock Object
 
 /****************************
 Battery Level Object
+<<<<<<< HEAD
+    Volunteer:
+=======
     Volunteer: Olivia, Bryan
+>>>>>>> origin/master
     Priority: High
     Complete: False
 ****************************/
+Testing
 
 
 
