@@ -82,7 +82,7 @@ void loop() {
      }
 
     oled.setCursor( 20, oled.height()/2 );
-    oled.setTextColor(RED);
+    oled.setTextColor(WHITE);
     oled.print( oxygen.display_name );
     oxygen_cursor_x = oled.getCursorX(); // For clearing value
     oxygen_cursor_y = oled.getCursorY(); // For clearing value
@@ -109,7 +109,7 @@ void loop() {
      }
 
     oled.setCursor( 20, oled.height()/4 );
-    oled.setTextColor(RED);
+    oled.setTextColor(WHITE);
     oled.print( co2.display_name );
     co2_cursor_x = oled.getCursorX(); // For clearing value
     co2_cursor_y = oled.getCursorY(); // For clearing value
