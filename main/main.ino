@@ -30,26 +30,24 @@
 * Sensor Objects
 *************************************/
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
-Sensor oxygen = Sensor("Ox: ",A0, 90.0, 50.0, 100.0, 0.0, 100.0 / 1023.0, 0.0);
-Sensor co2 = Sensor("CO2: ",A1, 500.0, 300.0, 800.0, 200.0, 600.0 / 1023.0, 200.0);
-Sensor pressure = Sensor("X: ",A2, 700.0, 500.0, 1023, 0, 1, 0);
+const int num_sensors = 3;
+Sensor sensors[num_sensors] = {
+                      Sensor("Ox: ", A0, 90.0, 50.0, 100.0, 0.0, 100.0 / 1023.0, 0.0),
+                      Sensor("CO2: ", A1, 500.0, 300.0, 800.0, 200.0, 600.0 / 1023.0, 200.0),
+                      Sensor("X: ", A2, 700.0, 500.0, 1023, 0, 1, 0)
+                    };
 
 /*************************************
 * Priority Slots / Coordinates
 *************************************/
 unsigned short int sensor_x = 20;
-int priority_y [7] = { 16*2, 16*3, 16*4, 16*5, 16*6, 16*7, 16*8};
+int priority_y [7] = {16*2, 16*3, 16*4, 16*5, 16*6, 16*7, 16*8};
 
 /*************************************
 * Declare Globals
 *************************************/
 
-float old_oxygen_level;
-unsigned short int oxygen_cursor_x;
-unsigned short int oxygen_cursor_y;
-float old_co2_level;
-unsigned short int co2_cursor_x;
-unsigned short int co2_cursor_y;
+float old_level;
 
 /*************************************
 *
@@ -69,6 +67,18 @@ void setup() {
   oled.begin(); // Start up OLED
   oled.fillScreen(BLACK); // Clear the screen
   oled.setTextSize(1); // Set default text size
+
+  // Initialize any additional sensor properties not addressed in Constructor
+  for(int i = 0; i < num_sensors; i++)
+  {
+    oled.setTextColor(BLACK);
+    oled.setCursor( sensor_x, priority_y[i] );
+    oled.print( sensors[i].display_name );
+    sensors[i].display_value_x = oled.getCursorX();
+    // Set last_display_value to arbitrary value
+    sensors[i].last_display_value = -9999;
+  }
+
 }
 
 
@@ -79,60 +89,32 @@ void setup() {
 *
 *************************************/
 void loop() {
+  for(int i = 0; i < num_sensors; i++)
+  {
+    sensors[i].update();
+    if( sensors[i].display_me ){
 
-  oxygen.update();
-  if( oxygen.display_me ){
+      if( sensors[i].display_value != sensors[i].last_display_value ){
+        // Overwrite any outdated value
+        oled.setTextColor(BLACK);
+        oled.setCursor( sensors[i].display_value_x, priority_y[i] );
+        oled.print((int)sensors[i].last_display_value+(String)"\n");
+      }
+      // Display sensor name and value
+      oled.setCursor( sensor_x, priority_y[i] );
+      oled.setTextColor(WHITE);
+      oled.print( sensors[i].display_name );
+      oled.print((int) sensors[i].display_value+(String)"\n");
 
-    if( oxygen.display_value != old_oxygen_level ){
-      oled.setTextColor(BLACK);
-      oled.setCursor( oxygen_cursor_x, oxygen_cursor_y );
-      oled.print((int)old_oxygen_level+(String)"%\n");
+      sensors[i].last_display_value = sensors[i].display_value;
     }
-
-    oled.setCursor( sensor_x, priority_y[0] );
-    oled.setTextColor(WHITE);
-    oled.print( oxygen.display_name );
-    oxygen_cursor_x = oled.getCursorX(); // For clearing value
-    oxygen_cursor_y = oled.getCursorY(); // For clearing value
-    oled.print((int)oxygen.display_value+(String)"%\n");
-
-    old_oxygen_level = oxygen.display_value;
-  }
-  else
-  {
-    oled.setCursor( sensor_x, priority_y[0] );
-    oled.setTextColor(BLACK);
-    oled.print( oxygen.display_name );
-    oled.print((int)old_oxygen_level+(String)"%\n");
-  }
-
-
-  co2.update();
-  if( co2.display_me ){
-
-    if( co2.display_value != old_co2_level ){
+    else
+    {
+      oled.setCursor( sensor_x, priority_y[i] );
       oled.setTextColor(BLACK);
-      oled.setCursor( co2_cursor_x, co2_cursor_y );
-      oled.print((int)old_co2_level+(String)"\n");
-     }
-
-    oled.setCursor( sensor_x, priority_y[1]);
-    oled.setTextColor(WHITE);
-    oled.print( co2.display_name );
-    co2_cursor_x = oled.getCursorX(); // For clearing value
-    co2_cursor_y = oled.getCursorY(); // For clearing value
-    oled.print((int)co2.display_value+(String)"\n");
-
-    old_co2_level = co2.display_value;
+      oled.print( sensors[i].display_name );
+      oled.print((int)sensors[i].last_display_value+(String)"\n");
+    }
   }
-  else
-  {
-    oled.setCursor( sensor_x, priority_y[1]);
-    oled.setTextColor(BLACK);
-    oled.print( co2.display_name );
-    oled.print((int)old_co2_level+(String)"\n");
-  }
-
 
 }
-// Comment blergsss

@@ -6,19 +6,8 @@
 // #include "Arduino.h"
 #include "Sensor.h"
 
-// Constructor without Name
-Sensor::Sensor(int Pin, float Hi_thresh, float Lo_thresh, float Conv_coef, float Conv_offset)
-{
-  pinMode(pin, INPUT);
-  pin = Pin;
-  hi_thresh = Hi_thresh;
-  lo_thresh = Lo_thresh;
-  conv_coef = Conv_coef;
-  display_me = false;
-  display_name = "Unnamed";
-}
 
-// Constructor with Name
+// Constructor
 Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,  float Conv_coef, float Conv_offset)
 {
   pinMode(pin, INPUT);
@@ -37,7 +26,7 @@ Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_
 void Sensor::convert()
 {
   // Convert to relevnt units. Limit to two decimal places (to limit oled flashing).
-  display_value = roundf( (conv_coef * sensor_read + conv_offset) * 100) / 100;
+  display_value = roundf( conv_coef * sensor_read + conv_offset);
 }
 
 void Sensor::check_thresh()
