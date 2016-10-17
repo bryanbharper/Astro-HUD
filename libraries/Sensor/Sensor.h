@@ -12,10 +12,10 @@
 class Sensor
 {
   public:
-  Sensor(int Pin, float Hi_thresh, float Lo_thresh, float Conv_coef, float Conv_offset);
   Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound, float Conv_coef, float Conv_offset);
     // Properties
     bool display_me;
+    int display_value_x;
     float hi_thresh;
     float lo_thresh;
     float hi_bound;
@@ -27,6 +27,7 @@ class Sensor
     unsigned short int pin;
     unsigned short int sensor_read;
     float display_value;
+    float last_display_value;
     String display_name;
     // Methods
     void update();
