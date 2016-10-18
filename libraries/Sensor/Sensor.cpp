@@ -44,6 +44,7 @@ void Sensor::update()
   sensor_read = analogRead(pin);
   convert();
   check_thresh();
+  calc_priority();
 }
 
 void Sensor::calc_priority()
