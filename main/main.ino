@@ -1,5 +1,3 @@
-#include <Helpers.h>
-
 /*************************************
 * SSD1351  Pin Assignments
 *************************************/
@@ -94,6 +92,7 @@ void loop() {
   for(int i = 0; i < num_sensors; i++)
   {
     sensors[i].update();
+    //priority_sort(sensors, num_sensors);
     if( sensors[i].display_me ){
 
       if( sensors[i].display_value != sensors[i].last_display_value ){
