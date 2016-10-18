@@ -12,7 +12,8 @@
 class Sensor
 {
   public:
-  Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound, float Conv_coef, float Conv_offset);
+    Sensor();
+    Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound, float Conv_coef, float Conv_offset);
     // Properties
     bool display_me;
     int display_value_x;
