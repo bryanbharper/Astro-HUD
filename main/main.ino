@@ -1,3 +1,5 @@
+#include <Helpers.h>
+
 /*************************************
 * SSD1351  Pin Assignments
 *************************************/
@@ -25,6 +27,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1351.h>
 #include <Sensor.h>
+#include <Helpers.h>
 
 /*************************************
 * Sensor Objects
@@ -33,7 +36,7 @@ Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
 const int num_sensors = 3;
 Sensor sensors[num_sensors] = {
                       Sensor("Ox: ", A0, 90.0, 50.0, 100.0, 0.0, 100.0 / 1023.0, 0.0),
-                      Sensor("CO2: ", A1, 500.0, 300.0, 800.0, 200.0, 600.0 / 1023.0, 200.0),
+                      Sensor("CO2: ", A1, 500.0, 300.0, 600.0, 134.0, 600.0 / 1023.0, 200.0),
                       Sensor("X: ", A2, 700.0, 500.0, 1023, 0, 1, 0)
                     };
 
@@ -46,8 +49,7 @@ int priority_y [7] = {16*2, 16*3, 16*4, 16*5, 16*6, 16*7, 16*8};
 /*************************************
 * Declare Globals
 *************************************/
-
-float old_level;
+int text_color;
 
 /*************************************
 *
@@ -102,7 +104,8 @@ void loop() {
       }
       // Display sensor name and value
       oled.setCursor( sensor_x, priority_y[i] );
-      oled.setTextColor(WHITE);
+      text_color = rgbTo16( 31, 63*(1-sensors[i].priority), 31*(1-sensors[i].priority));
+      oled.setTextColor( text_color );
       oled.print( sensors[i].display_name );
       oled.print((int) sensors[i].display_value+(String)"\n");
 
@@ -116,5 +119,5 @@ void loop() {
       oled.print((int)sensors[i].last_display_value+(String)"\n");
     }
   }
-
+  Serial.print(sensors[1].display_name + "\t" + sensors[1].priority + "\n");
 }
