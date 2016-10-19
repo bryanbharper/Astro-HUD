@@ -12,7 +12,8 @@
 class Sensor
 {
   public:
-  Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound, float Conv_coef, float Conv_offset);
+    Sensor();
+    Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound, float Conv_coef, float Conv_offset);
     /*** Properties ***/
       // Sensor Specific
         float hi_thresh;
@@ -26,7 +27,7 @@ class Sensor
         unsigned short int pin;
         unsigned short int sensor_read;
 
-      // Front End Specific 
+      // Front End Specific
         String display_name;
         float display_value;
         bool display_me;
@@ -48,7 +49,7 @@ class Sensor
       void check_thresh();
       void convert();
       void calc_priority();
-
+      
 };
 
 #endif

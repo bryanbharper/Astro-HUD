@@ -7,7 +7,13 @@
 #include "Sensor.h"
 
 
-// Constructor
+// Constructors
+Sensor::Sensor(){
+  priority = 0;
+  priority_offset = 0;
+  display_me = false;
+}
+
 Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,  float Conv_coef, float Conv_offset)
 {
   pinMode(pin, INPUT);
