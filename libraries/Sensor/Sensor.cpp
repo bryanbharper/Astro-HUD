@@ -22,7 +22,7 @@ Sensor::Sensor(){
     conv_offset = 0;
 
   /* Front End Specific */
-    display_name = name;
+    display_name = "x: ";
     display_me = false;
     last_display_x = 0;
     last_display_y = 0;
