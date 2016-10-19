@@ -68,16 +68,6 @@ void setup() {
   oled.fillScreen(BLACK); // Clear the screen
   oled.setTextSize(1); // Set default text size
 
-  // Initialize any additional sensor properties not addressed in Constructor
-  for(int i = 0; i < num_sensors; i++)
-  {
-    oled.setTextColor(BLACK);
-    oled.setCursor( sensor_x, priority_y[i] );
-    oled.print( sensors[i].display_name );
-    sensors[i].display_value_x = oled.getCursorX();
-    // Set last_display_value to arbitrary value
-    sensors[i].last_display_value = -9999;
-  }
 
 }
 
