@@ -62,6 +62,6 @@ void Sensor::calc_priority()
     priority = abs( display_value - hi_thresh) / abs(hi_bound - hi_thresh) + priority_offset;
   }
   else{
-    priority = abs(lo_thresh - display_value) / abs(lo_thresh - hi_bound) + priority_offset;
+    priority = abs(lo_thresh - display_value) / abs(lo_thresh - lo_bound) + priority_offset;
   }
 }
