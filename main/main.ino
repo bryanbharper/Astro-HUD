@@ -10,7 +10,7 @@
 /*************************************
 * Color Definitions
 *************************************/
-#define  BLACK          0x0000
+#define BLACK           0x0000
 #define BLUE            0x001F
 #define RED             0xF800
 #define GREEN           0x07E0
@@ -33,9 +33,9 @@
 Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
 const int num_sensors = 3;
 Sensor sensors[num_sensors] = {
-                      Sensor("Ox: ", A0, 90.0, 50.0, 100.0, 0.0, 100.0 / 1023.0, 0.0),
-                      Sensor("CO2: ", A1, 500.0, 300.0, 600.0, 134.0, 600.0 / 1023.0, 200.0),
-                      Sensor("X: ", A2, 700.0, 500.0, 1023, 0, 1, 0)
+                      Sensor("Ox: ", A0, 90, 50, 100, 0, 100.0 / 1023.0, 0),
+                      Sensor("CO2: ", A1, 500, 300, 800, 200, 600.0 / 1023.0, 200),
+                      Sensor("X: ", A2, 700, 500, 1023, 0, 1, 0)
                     };
 
 /*************************************
@@ -87,8 +87,8 @@ void loop() {
 
       if( sensors[i].display_value != sensors[i].last_display_value ){
         // Overwrite any outdated value
-        oled.setTextColor(BLACK);
-        oled.setCursor( sensors[i].display_value_x, priority_y[i] );
+        oled.setTextColor( rgbTo16(0, 0, 0) );
+        oled.setCursor( sensors[i].last_display_value_x, priority_y[i] );
         oled.print((int)sensors[i].last_display_value+(String)"\n");
       }
       // Display sensor name and value
@@ -96,6 +96,9 @@ void loop() {
       text_color = rgbTo16( 31, 63*(1-sensors[i].priority), 31*(1-sensors[i].priority));
       oled.setTextColor( text_color );
       oled.print( sensors[i].display_name );
+      sensors[i].last_display_value_x = oled.getCursorX();
+      sensors[i].last_display_value_y = oled.getCursorY();
+
       oled.print((int) sensors[i].display_value+(String)"\n");
 
       sensors[i].last_display_value = sensors[i].display_value;
@@ -103,10 +106,11 @@ void loop() {
     else
     {
       oled.setCursor( sensor_x, priority_y[i] );
-      oled.setTextColor(BLACK);
+      oled.setTextColor( rgbTo16(0, 0, 0) );
       oled.print( sensors[i].display_name );
       oled.print((int)sensors[i].last_display_value+(String)"\n");
     }
   }
-  Serial.print(sensors[1].display_name + "\t" + sensors[1].priority + "\n");
+  Serial.print( sensors[1].priority);
+  Serial.print( "\n" );
 }
