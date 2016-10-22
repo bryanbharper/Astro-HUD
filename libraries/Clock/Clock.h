@@ -15,14 +15,16 @@ class Clock
   Clock(int PC_speed);//MHz_PC_speed(int speed);
   //Properties
   int speed;
-  //int hour;
-  //int min;
+  int hour;
+  int min;
   int sec;
-  int wait;
+  unsigned long prevMillis;
+  unsigned long currentMillis;
+  unsigned long interval;
   //Methods
-  void flash();//DC comic flash not blinking
   void update();
   void constraints();
+//djdflk
 
 
 }
