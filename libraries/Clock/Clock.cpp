@@ -6,7 +6,7 @@
 #include "Clock.h"
 
 //Constructor for processor speed in MHz
-Clock::Clock(int PC_speed)
+Clock::Clock(
 {
   interval = 1000;
   hour=0;
@@ -37,5 +37,5 @@ void Clock::update()
     sec++;
     prevMillis = currentMillis;
     constraints();
-  }  
+  }
 }

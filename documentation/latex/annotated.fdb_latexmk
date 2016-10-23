@@ -1,0 +1,11 @@
+# Fdb version 3
+["latex"] 1477192520 "annotated.tex" "annotated.dvi" "annotated" 1477192520
+  "/etc/texmf/web2c/texmf.cnf" 1473431351 1101 af7716885e081ab43982cab7b4672c1a ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
+  "/var/lib/texmf/web2c/pdftex/latex.fmt" 1473431937 3853719 70504d6b0d09a53b7760d798e5d05969 ""
+  "annotated.aux" 1477192520 8 a94a2480d3289e625eea47cd1b285758 ""
+  "annotated.tex" 1477192328 508 0514d74a9f63032a730bf51cfaa8e586 ""
+  (generated)
+  "annotated.dvi"
+  "annotated.log"

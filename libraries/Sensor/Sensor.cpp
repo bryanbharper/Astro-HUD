@@ -1,37 +1,9 @@
-/*
-  Sensor.cpp - Library for
-  ...
-*/
-
-// #include "Arduino.h"
 #include "Sensor.h"
 
 
-// Constructors
-Sensor::Sensor(){
-  /* Sensor Specific */
-    pin = A0;
-    pinMode(pin, INPUT);
-    hi_bound = 1023;
-    lo_bound = 0;
-    hi_thresh = hi_bound;
-    lo_thresh = lo_bound;
-    priority = 0;
-    priority_offset = 0;
-    conv_coef = 1;
-    conv_offset = 0;
-
-  /* Front End Specific */
-    display_name = "x: ";
-    display_me = false;
-    last_display_x = 0;
-    last_display_y = 0;
-    last_display_value_x = 0;
-    last_display_value_y = 0;
-    last_display_value = 0;
-}
-
-Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,  float Conv_coef, float Conv_offset)
+// Constructor
+Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound,
+               float Lo_bound,  float Conv_coef, float Conv_offset)
 {
   /* Sensor Specific */
     pin = Pin;
@@ -44,7 +16,6 @@ Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_
     conv_offset = Conv_offset;
     priority = 0;
     priority_offset = 0;
-
 
   /* Front End Specific */
     display_name = name;

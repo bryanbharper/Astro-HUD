@@ -1,0 +1,190 @@
+\hypertarget{classSensor}{}\section{Sensor Class Reference}
+\label{classSensor}\index{Sensor@{Sensor}}
+
+
+\hyperlink{classSensor}{Sensor} objects store information \& provide methods for a given hardware sensor.  
+
+
+
+
+{\ttfamily \#include $<$Sensor.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSensor_a48d3fd5b0aefcf7ca3cfeebb22d54caa}{Sensor} (String name, int Pin, float Hi\+\_\+thresh, float Lo\+\_\+thresh, float Hi\+\_\+bound, float Lo\+\_\+bound, float Conv\+\_\+coef, float Conv\+\_\+offset)
+\begin{DoxyCompactList}\small\item\em Constructor for \hyperlink{classSensor}{Sensor} object. \end{DoxyCompactList}\item 
+void \hyperlink{classSensor_a542a721041768395de2c6e9012622113}{update} ()
+\begin{DoxyCompactList}\small\item\em Dynamically updates all sensor properties. \end{DoxyCompactList}\item 
+void \hyperlink{classSensor_ae57d3c8aa71dc50dca5000bfefc7c814}{check\+\_\+thresh} ()
+\item 
+void \hyperlink{classSensor_a8fafee0772386f423b010742413f50cd}{convert} ()
+\item 
+void \hyperlink{classSensor_a083c25b32b7893ea7c5d5e76dbc7503d}{calc\+\_\+priority} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String \hyperlink{classSensor_ae5ac222a8b6f8aa8268d644feb35bbd0}{display\+\_\+name}\hypertarget{classSensor_ae5ac222a8b6f8aa8268d644feb35bbd0}{}\label{classSensor_ae5ac222a8b6f8aa8268d644feb35bbd0}
+
+\begin{DoxyCompactList}\small\item\em The name of the sensor (used on the H\+UD). \end{DoxyCompactList}\item 
+unsigned short int \hyperlink{classSensor_a1533fd4f5fd1f6552141cb41c8a52240}{pin}
+\item 
+unsigned short int \hyperlink{classSensor_a6a75d312753433dcd62e99bea51efb5f}{sensor\+\_\+read}\hypertarget{classSensor_a6a75d312753433dcd62e99bea51efb5f}{}\label{classSensor_a6a75d312753433dcd62e99bea51efb5f}
+
+\begin{DoxyCompactList}\small\item\em The raw value read off the assigned hardware pin. \end{DoxyCompactList}\item 
+float \hyperlink{classSensor_a68bb74b260b1a1bca9c740a89275f190}{display\+\_\+value}\hypertarget{classSensor_a68bb74b260b1a1bca9c740a89275f190}{}\label{classSensor_a68bb74b260b1a1bca9c740a89275f190}
+
+\begin{DoxyCompactList}\small\item\em The sensor value converted into approriated units. \end{DoxyCompactList}\item 
+float \hyperlink{classSensor_a74860a6d7345801931620a60df08eaab}{hi\+\_\+bound}
+\item 
+float \hyperlink{classSensor_a911ac4a3ab38cb07cd9452c1cdb1b77e}{lo\+\_\+bound}
+\item 
+float \hyperlink{classSensor_a66b9a03da7810ac51d8724b250fee747}{hi\+\_\+thresh}
+\item 
+float \hyperlink{classSensor_a5fea9f7da15f3f88017953b01d944a4b}{lo\+\_\+thresh}
+\item 
+float \hyperlink{classSensor_a13a675b7eabac15861a4d9a723d3b5ae}{conv\+\_\+coef}
+\item 
+float \hyperlink{classSensor_a44d7755fab946e33ce35813b9057c910}{conv\+\_\+offset}
+\item 
+float \hyperlink{classSensor_a8fb814c9040a311ef303cff56b793064}{priority}
+\item 
+float \hyperlink{classSensor_aa92fdf39b5b6a39e4be505b3006bda02}{priority\+\_\+offset}
+\item 
+bool \hyperlink{classSensor_ad9b7163e079befb8f3f9af6bdcc0ce21}{display\+\_\+me}
+\item 
+unsigned short int \hyperlink{classSensor_ad6c53c063c3494cabb8db1db7a73f1c4}{last\+\_\+display\+\_\+x}
+\item 
+unsigned short int \hyperlink{classSensor_abd9a9623b38fb1b096f8d6d83479a843}{last\+\_\+display\+\_\+y}
+\item 
+unsigned short int \hyperlink{classSensor_a189156cf6f62b9f94b88a7cb54ad32e5}{last\+\_\+display\+\_\+value\+\_\+x}
+\item 
+unsigned short int \hyperlink{classSensor_ab92d6ca846f827db0d4e6d6f169a6df5}{last\+\_\+display\+\_\+value\+\_\+y}
+\item 
+float \hyperlink{classSensor_a0dcb7b0f2e83f31c89be1070cbbc96bb}{last\+\_\+display\+\_\+value}\hypertarget{classSensor_a0dcb7b0f2e83f31c89be1070cbbc96bb}{}\label{classSensor_a0dcb7b0f2e83f31c89be1070cbbc96bb}
+
+\begin{DoxyCompactList}\small\item\em Tracks sensor\textquotesingle{}s display\+\_\+value. Used by front end to clear O\+L\+ED. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSensor}{Sensor} objects store information \& provide methods for a given hardware sensor. 
+
+For each hardware sensor connected to the H\+UD system a \hyperlink{classSensor}{Sensor} object must be instantiated. This object is used to handle all actions pertaining to the hardware sensor.
+
+From the point of view of the microcontroller running the H\+UD system code, a hardware sensor is simply a voltage on one of the G\+P\+IO pins. For the voltage to be converted into meaningful data, it is necessary to keep track of information about the hardware sensor and tie that information to the value read on the given G\+P\+IO pin. For example, in order for a voltage to represent a given physical parameter, it is necessary to know the conversion formula from volts to the desired physical units.
+
+An instantiated \hyperlink{classSensor}{Sensor} object keeps track of all necessary sensor properties, such as the sensor\textquotesingle{}s name, units, conersion factors, current and previous values, etc.. It also has methods for performing various sensor related actions, such as reading a voltage off of a pin, converting that value into the specified units, and updating the sensors priority based on external information.
+
+There are also various properties and operations specific to the H\+UD system that need to be tracked in order to make decisions about how and when to display information on the H\+UD (see calc\+\_\+priority, hi\+\_\+thresh, lo\+\_\+thresh, and priority). The \hyperlink{classSensor}{Sensor} object is also used to define and utilize these H\+UD specific members. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{Sensor(\+String name, int Pin, float Hi\+\_\+thresh, float Lo\+\_\+thresh, float Hi\+\_\+bound, float Lo\+\_\+bound, float Conv\+\_\+coef, float Conv\+\_\+offset)}{Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound, float Conv_coef, float Conv_offset)}}]{\setlength{\rightskip}{0pt plus 5cm}Sensor\+::\+Sensor (
+\begin{DoxyParamCaption}
+\item[{String}]{name, }
+\item[{int}]{Pin, }
+\item[{float}]{Hi\+\_\+thresh, }
+\item[{float}]{Lo\+\_\+thresh, }
+\item[{float}]{Hi\+\_\+bound, }
+\item[{float}]{Lo\+\_\+bound, }
+\item[{float}]{Conv\+\_\+coef, }
+\item[{float}]{Conv\+\_\+offset}
+\end{DoxyParamCaption}
+)}\hypertarget{classSensor_a48d3fd5b0aefcf7ca3cfeebb22d54caa}{}\label{classSensor_a48d3fd5b0aefcf7ca3cfeebb22d54caa}
+
+
+Constructor for \hyperlink{classSensor}{Sensor} object. 
+
+The parameters of the \hyperlink{classSensor}{Sensor} constructor include of all the user-\/specified (via config file) hardware sensor properties which cannot be determined internally. These values are assigned upon instantiation to the corresponding \hyperlink{classSensor}{Sensor} properties. Any other properties are assigned default values (generally zero).
+
+{\itshape Note\+:} By convention, parameter names are capitalized, and the corresponding \hyperlink{classSensor}{Sensor} property goes by the same name, except in all lower-\/case. 
+
+\subsection{Member Function Documentation}
+\index{Sensor@{Sensor}!calc\+\_\+priority@{calc\+\_\+priority}}
+\index{calc\+\_\+priority@{calc\+\_\+priority}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{calc\+\_\+priority()}{calc_priority()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sensor\+::calc\+\_\+priority (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSensor_a083c25b32b7893ea7c5d5e76dbc7503d}{}\label{classSensor_a083c25b32b7893ea7c5d5e76dbc7503d}
+Calling calc\+\_\+priority up calculate priority. The formula is seen here\+:
+
+ \index{Sensor@{Sensor}!check\+\_\+thresh@{check\+\_\+thresh}}
+\index{check\+\_\+thresh@{check\+\_\+thresh}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{check\+\_\+thresh()}{check_thresh()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sensor\+::check\+\_\+thresh (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSensor_ae57d3c8aa71dc50dca5000bfefc7c814}{}\label{classSensor_ae57d3c8aa71dc50dca5000bfefc7c814}
+Calling check\+\_\+thresh will determine whether the current display\+\_\+value is outside hi\+\_\+thresh and lo\+\_\+thresh. If it is outside the threshold, display\+\_\+me is set to {\itshape True}. Otherwise it is set to {\itshape False}. \index{Sensor@{Sensor}!convert@{convert}}
+\index{convert@{convert}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{convert()}{convert()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sensor\+::convert (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSensor_a8fafee0772386f423b010742413f50cd}{}\label{classSensor_a8fafee0772386f423b010742413f50cd}
+Calling convert will calculate and update the sensor value in its proper units. The formula is\+: \begin{DoxyVerb}display_value = conv_coef * sensor_read + conv_offset\end{DoxyVerb}
+ \index{Sensor@{Sensor}!update@{update}}
+\index{update@{update}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{update()}{update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sensor\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSensor_a542a721041768395de2c6e9012622113}{}\label{classSensor_a542a721041768395de2c6e9012622113}
+
+
+Dynamically updates all sensor properties. 
+
+Calling update will read the assigned pin value, then call convert, check\+\_\+thresh, and calc\+\_\+priority. 
+
+\subsection{Member Data Documentation}
+\index{Sensor@{Sensor}!conv\+\_\+coef@{conv\+\_\+coef}}
+\index{conv\+\_\+coef@{conv\+\_\+coef}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{conv\+\_\+coef}{conv_coef}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::conv\+\_\+coef}\hypertarget{classSensor_a13a675b7eabac15861a4d9a723d3b5ae}{}\label{classSensor_a13a675b7eabac15861a4d9a723d3b5ae}
+The relationship between the voltage produced by the hardware sensor and the physical parameter represented is assumed to be linear. This is a good approximation in most practical applications. conv\+\_\+coef is \index{Sensor@{Sensor}!conv\+\_\+offset@{conv\+\_\+offset}}
+\index{conv\+\_\+offset@{conv\+\_\+offset}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{conv\+\_\+offset}{conv_offset}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::conv\+\_\+offset}\hypertarget{classSensor_a44d7755fab946e33ce35813b9057c910}{}\label{classSensor_a44d7755fab946e33ce35813b9057c910}
+The relationship between the voltage produced by the hardware sensor and the physical parameter represented is assumed to be linear. This is a good approximation in most practical applications. conv\+\_\+offset is the offset of the linear approximation. \index{Sensor@{Sensor}!display\+\_\+me@{display\+\_\+me}}
+\index{display\+\_\+me@{display\+\_\+me}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{display\+\_\+me}{display_me}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sensor\+::display\+\_\+me}\hypertarget{classSensor_ad9b7163e079befb8f3f9af6bdcc0ce21}{}\label{classSensor_ad9b7163e079befb8f3f9af6bdcc0ce21}
+A bollean used to determine whether or not a sensor should be displayed at any given moment. \hyperlink{classSensor}{Sensor} values are not always on displayed in order to avoid information fatigue. \index{Sensor@{Sensor}!hi\+\_\+bound@{hi\+\_\+bound}}
+\index{hi\+\_\+bound@{hi\+\_\+bound}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{hi\+\_\+bound}{hi_bound}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::hi\+\_\+bound}\hypertarget{classSensor_a74860a6d7345801931620a60df08eaab}{}\label{classSensor_a74860a6d7345801931620a60df08eaab}
+This value specifies the highest value (in the sensor\textquotesingle{}s units, not volts) the hardware sensor is capable of reaching. \index{Sensor@{Sensor}!hi\+\_\+thresh@{hi\+\_\+thresh}}
+\index{hi\+\_\+thresh@{hi\+\_\+thresh}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{hi\+\_\+thresh}{hi_thresh}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::hi\+\_\+thresh}\hypertarget{classSensor_a66b9a03da7810ac51d8724b250fee747}{}\label{classSensor_a66b9a03da7810ac51d8724b250fee747}
+A sensor value (in the sensor\textquotesingle{}s units, not volts) above this will set display\+\_\+me to {\itshape True}. If the sensor value in between hi\+\_\+thres and lo\+\_\+thresh, display\+\_\+me wil lbe set to {\itshape False}. \index{Sensor@{Sensor}!last\+\_\+display\+\_\+value\+\_\+x@{last\+\_\+display\+\_\+value\+\_\+x}}
+\index{last\+\_\+display\+\_\+value\+\_\+x@{last\+\_\+display\+\_\+value\+\_\+x}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{last\+\_\+display\+\_\+value\+\_\+x}{last_display_value_x}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short int Sensor\+::last\+\_\+display\+\_\+value\+\_\+x}\hypertarget{classSensor_a189156cf6f62b9f94b88a7cb54ad32e5}{}\label{classSensor_a189156cf6f62b9f94b88a7cb54ad32e5}
+Tracks x-\/coordinate of display\+\_\+value on H\+UD. Used by front end to clear O\+L\+ED. \index{Sensor@{Sensor}!last\+\_\+display\+\_\+value\+\_\+y@{last\+\_\+display\+\_\+value\+\_\+y}}
+\index{last\+\_\+display\+\_\+value\+\_\+y@{last\+\_\+display\+\_\+value\+\_\+y}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{last\+\_\+display\+\_\+value\+\_\+y}{last_display_value_y}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short int Sensor\+::last\+\_\+display\+\_\+value\+\_\+y}\hypertarget{classSensor_ab92d6ca846f827db0d4e6d6f169a6df5}{}\label{classSensor_ab92d6ca846f827db0d4e6d6f169a6df5}
+Tracks y-\/coordinate of display\+\_\+value on H\+UD. Used by front end to clear O\+L\+ED. \index{Sensor@{Sensor}!last\+\_\+display\+\_\+x@{last\+\_\+display\+\_\+x}}
+\index{last\+\_\+display\+\_\+x@{last\+\_\+display\+\_\+x}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{last\+\_\+display\+\_\+x}{last_display_x}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short int Sensor\+::last\+\_\+display\+\_\+x}\hypertarget{classSensor_ad6c53c063c3494cabb8db1db7a73f1c4}{}\label{classSensor_ad6c53c063c3494cabb8db1db7a73f1c4}
+Tracks x-\/coordinate of the senor\textquotesingle{}s name on H\+UD. Used by front end to clear O\+L\+ED. \index{Sensor@{Sensor}!last\+\_\+display\+\_\+y@{last\+\_\+display\+\_\+y}}
+\index{last\+\_\+display\+\_\+y@{last\+\_\+display\+\_\+y}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{last\+\_\+display\+\_\+y}{last_display_y}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short int Sensor\+::last\+\_\+display\+\_\+y}\hypertarget{classSensor_abd9a9623b38fb1b096f8d6d83479a843}{}\label{classSensor_abd9a9623b38fb1b096f8d6d83479a843}
+Tracks y-\/coordinate of the senor\textquotesingle{}s name on H\+UD. Used by front end to clear O\+L\+ED. \index{Sensor@{Sensor}!lo\+\_\+bound@{lo\+\_\+bound}}
+\index{lo\+\_\+bound@{lo\+\_\+bound}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{lo\+\_\+bound}{lo_bound}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::lo\+\_\+bound}\hypertarget{classSensor_a911ac4a3ab38cb07cd9452c1cdb1b77e}{}\label{classSensor_a911ac4a3ab38cb07cd9452c1cdb1b77e}
+This value specifies the lowest value (in the sensor\textquotesingle{}s units, not volts) the hardware sensor is capable of reaching. \index{Sensor@{Sensor}!lo\+\_\+thresh@{lo\+\_\+thresh}}
+\index{lo\+\_\+thresh@{lo\+\_\+thresh}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{lo\+\_\+thresh}{lo_thresh}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::lo\+\_\+thresh}\hypertarget{classSensor_a5fea9f7da15f3f88017953b01d944a4b}{}\label{classSensor_a5fea9f7da15f3f88017953b01d944a4b}
+A sensor value (in the sensor\textquotesingle{}s units, not volts) below this will set display\+\_\+me to {\itshape True}. If the sensor value in between hi\+\_\+thres and lo\+\_\+thresh, display\+\_\+me wil lbe set to {\itshape False}. \index{Sensor@{Sensor}!pin@{pin}}
+\index{pin@{pin}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{pin}{pin}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short int Sensor\+::pin}\hypertarget{classSensor_a1533fd4f5fd1f6552141cb41c8a52240}{}\label{classSensor_a1533fd4f5fd1f6552141cb41c8a52240}
+A numeric value that represents the pin on the microcontroller which the sensor is connected too. This value will be defined by microcontroller manufacturer. \index{Sensor@{Sensor}!priority@{priority}}
+\index{priority@{priority}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{priority}{priority}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::priority}\hypertarget{classSensor_a8fb814c9040a311ef303cff56b793064}{}\label{classSensor_a8fb814c9040a311ef303cff56b793064}
+Each sensor is dynamically assigned a priority score for decissions regaurding when and how to display information. \index{Sensor@{Sensor}!priority\+\_\+offset@{priority\+\_\+offset}}
+\index{priority\+\_\+offset@{priority\+\_\+offset}!Sensor@{Sensor}}
+\subsubsection[{\texorpdfstring{priority\+\_\+offset}{priority_offset}}]{\setlength{\rightskip}{0pt plus 5cm}float Sensor\+::priority\+\_\+offset}\hypertarget{classSensor_aa92fdf39b5b6a39e4be505b3006bda02}{}\label{classSensor_aa92fdf39b5b6a39e4be505b3006bda02}
+Set to zero by default, this property is used to give a sensor an {\itshape intrinsic} priorrity. All sensors are genearlly assumed to have the same {\itshape intrinsic} priority, and so this is set to zero by default. However, this property can used to \char`\"{}boost\char`\"{} or \char`\"{}subdue\char`\"{} a sensor\textquotesingle{}s priority relative to others. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/bryan/\+G\+I\+T\+\_\+projects/\+Astro-\/\+H\+U\+D/libraries/\+Sensor/Sensor.\+h\item 
+/home/bryan/\+G\+I\+T\+\_\+projects/\+Astro-\/\+H\+U\+D/libraries/\+Sensor/Sensor.\+cpp\end{DoxyCompactItemize}
