@@ -1,0 +1,7 @@
+PWD /home/bryan/GIT_projects/Astro-HUD/documentation/latex
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/latex.fmt
+INPUT annotated.tex
+OUTPUT annotated.log
