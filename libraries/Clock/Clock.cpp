@@ -2,18 +2,18 @@
   Clock.cpp - Library for
   ...
 */
-
+#include <Arduino.h>
 #include "Clock.h"
 
 //Constructor for processor speed in MHz
-Clock::Clock(
+Clock::Clock()
 {
   interval = 1000;
   hour=0;
   min=0;
   sec=0;
   prevMillis=0;
-  currentMillis=millis();
+  currentMillis= 0;
 }
 
 void Clock::constraints()
@@ -32,9 +32,10 @@ void Clock::constraints()
 
 void Clock::update()
 {
+  currentMillis=millis();
   if((currentMillis - prevMillis) > interval)
   {
-    sec++;
+    ++sec;
     prevMillis = currentMillis;
     constraints();
   }

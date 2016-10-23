@@ -1,3 +1,5 @@
+#include <Clock.h>
+
 /*************************************
 * SSD1351  Pin Assignments
 *************************************/
@@ -26,6 +28,7 @@
 #include <Adafruit_SSD1351.h>
 #include <Sensor.h>
 #include <Helpers.h>
+#include <Clock.h>
 
 /*************************************
 * Sensor Objects
@@ -37,6 +40,12 @@ Sensor sensors[num_sensors] = {
                       Sensor("CO2: ", A1, 500, 300, 800, 200, 600.0 / 1023.0, 200),
                       Sensor("X: ", A2, 700, 500, 1023, 0, 1, 0)
                     };
+
+
+/*************************************
+* Clock
+*************************************/
+Clock cogsworth = Clock();
 
 /*************************************
 * Priority Slots / Coordinates
@@ -79,6 +88,14 @@ void setup() {
 *
 *************************************/
 void loop() {
+  oled.setCursor(0, 0);
+  oled.setTextColor( rgbTo16( 0, 0, 0 ) );
+  oled.print( (int)cogsworth.hour + (String)":" + (int)cogsworth.min + (String)":" + (int)cogsworth.sec );
+  cogsworth.update();
+  oled.setCursor(0, 0);
+  oled.setTextColor( rgbTo16( 0, 0, 31 ) );
+  oled.print( (int)cogsworth.hour + (String)":" + (int)cogsworth.min + (String)":" + (int)cogsworth.sec );
+
   for(int i = 0; i < num_sensors; i++)
   {
     sensors[i].update();

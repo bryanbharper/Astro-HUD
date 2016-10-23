@@ -28,6 +28,9 @@ Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_
 
 }
 
+Sensor::Sensor()
+{}
+
 void Sensor::convert()
 {
   // Convert to relevnt units. Limit to two decimal places (to limit oled flashing).

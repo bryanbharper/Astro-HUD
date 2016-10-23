@@ -51,6 +51,8 @@ class Sensor
     Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,
            float Conv_coef, float Conv_offset);
 
+    Sensor();
+
       String display_name;  ///< The name of the sensor (used on the HUD).
 
       unsigned short int pin; ///< A numeric value that represents the pin on the microcontroller
