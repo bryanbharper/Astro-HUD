@@ -51,6 +51,10 @@ class Sensor
     Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,
            float Conv_coef, float Conv_offset);
 
+    Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,
+            float Conv_coef, float Conv_offset, floar Priority_offset);
+            ///< if a priority_offset is needed for a sensor
+
     Sensor();
 
       String display_name;  ///< The name of the sensor (used on the HUD).
@@ -70,12 +74,18 @@ class Sensor
                         ///< not volts) the hardware sensor is capable of reaching.
 
       float hi_thresh;  ///< A sensor value (in the sensor's units, not volts) above this will set
-                        ///< display_me to _True_. If the sensor value in between hi_thres and
-                        ///< lo_thresh, display_me wil lbe set to _False_.
+                        ///< display_me to _True_.
+
+      float mid_lo;     ///< A sensor value below this will set display_me to _True_ for 5 seconds.
+                        ///< If the sensor value in between mid_hi and mid_lo, display_me will be
+                        ///< set to _False_. 25% lower than mid_lo will result in lo_thresh priority.
+
+      float mid_hi;     ///< A sensor value above this will set display_me to _True_ for 5 seconds.
+                        ///< If the sensor value in between mid_hi and mid_lo, display_me will be
+                        ///< set to _False_. 25% higher than mid_hi will result in hi_thresh priority.
 
       float lo_thresh;  ///< A sensor value (in the sensor's units, not volts) below this will set
-                        ///< display_me to _True_. If the sensor value in between hi_thres and
-                        ///< lo_thresh, display_me wil lbe set to _False_.
+                        ///< display_me to _True_.
 
       float conv_coef;  ///< The relationship between the voltage produced by the hardware sensor
                         ///< and the physical parameter represented is assumed to be linear. This
