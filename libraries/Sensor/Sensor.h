@@ -113,6 +113,10 @@ class Sensor
                               ///< by default. However, this property can used to "boost" or
                               ///< "subdue" a sensor's priority relative to others.
 
+      unsigned short int priority_y;  ///<positions sensor base off priority after priority_sort in Helpers
+
+      int * priority_count=1; ///< counter for the initial sensor position
+
       bool display_me;  ///< A bollean used to determine whether or not a sensor should be
                         ///< displayed at any given moment. Sensor values are not always on
                         ///< displayed in order to avoid information fatigue.

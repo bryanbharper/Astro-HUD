@@ -51,7 +51,7 @@ Clock cogsworth = Clock();
 * Priority Slots / Coordinates
 *************************************/
 unsigned short int sensor_x = 20;
-int priority_y [7] = {16*2, 16*3, 16*4, 16*5, 16*6, 16*7, 16*8};
+//int priority_y [7] = {16*2, 16*3, 16*4, 16*5, 16*6, 16*7, 16*8};
 
 /*************************************
 * Declare Globals
@@ -99,17 +99,18 @@ void loop() {
   for(int i = 0; i < num_sensors; i++)
   {
     sensors[i].update();
-    //priority_sort(sensors, num_sensors);
+    priority_sort(sensors, num_sensors);
+    
     if( sensors[i].display_me ){
 
       if( sensors[i].display_value != sensors[i].last_display_value ){
         // Overwrite any outdated value
         oled.setTextColor( rgbTo16(0, 0, 0) );
-        oled.setCursor( sensors[i].last_display_value_x, priority_y[i] );
+        oled.setCursor( sensors[i].last_display_value_x, sensors[i].priority_y );
         oled.print((int)sensors[i].last_display_value+(String)"\n");
       }
       // Display sensor name and value
-      oled.setCursor( sensor_x, priority_y[i] );
+      oled.setCursor( sensor_x, sensors[i].priority_y );
       text_color = rgbTo16( sensors[i].r_color, sensors[i].g_color, sensors[i].b_color);
       oled.setTextColor( text_color );
       oled.print( sensors[i].display_name );
@@ -122,7 +123,7 @@ void loop() {
     }
     else
     {
-      oled.setCursor( sensor_x, priority_y[i] );
+      oled.setCursor( sensor_x, sensors[i].priority_y );
       oled.setTextColor( rgbTo16(0, 0, 0) );
       oled.print( sensors[i].display_name );
       oled.print((int)sensors[i].last_display_value+(String)"\n");

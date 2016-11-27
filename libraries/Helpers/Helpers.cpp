@@ -49,7 +49,8 @@ unsigned short int rgbTo16(unsigned short int r, unsigned short int g, unsigned 
 void priority_sort(Sensor a[], unsigned short int size)
 {
   int i, j, flag = 1;    // Initialize flag to 1
-  Sensor temp;
+  unsigned short int temp_y;
+
   for(i = 1; (i <= size) && flag; i++)
   {
       flag = 0;
@@ -57,9 +58,9 @@ void priority_sort(Sensor a[], unsigned short int size)
      {
            if (a[j+1].priority > a[j].priority)
           {
-                temp = a[j];             // Switch elements
-                a[j] = a[j+1];
-                a[j+1] = temp;
+                temp_y = a[j].priority_y;             // Switch elements
+                a[j].priority_y = a[j+1].priority_y;
+                a[j+1].priority_y = temp_y;
                 flag = 1;               // Flag if switched
            }
       }
