@@ -63,6 +63,12 @@ class Sensor
                               ///< which the sensor is connected too. This value will be defined
                               ///< by microcontroller manufacturer.
 
+      unsigned short int r_color; ///< the RED value of rgb for text_color in main
+
+      unsigned short int g_color; ///< the GREEN value of rgb for text_color in main
+
+      unsigned short int b_color; ///< the BLUE value of rgb for text_color in main
+
       unsigned short int sensor_read; ///< The raw value read off the assigned hardware pin.
 
       float display_value;  ///< The sensor value converted into approriated units.

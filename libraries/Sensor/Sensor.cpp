@@ -69,21 +69,10 @@ void Sensor::convert()
 
 void Sensor::check_thresh()
 {
-  if( ( display_value <= lo_thresh ) || ( display_value >= hi_thresh ) )
+  if( ( display_value <= mid_lo) || ( display_value >= mid_hi) )
   {
     display_me = true;
-  }
-  else if( ( display_value <= mid_lo) || ( display_value >= mid_hi) )
-  {
-    display_me = true;
-    millis();
-    millis();
-    millis();
-    millis();
-    millis();
-    display_me = false;
-  }
-  else {
+  }  else {
     display_me = false;
   }
 
@@ -95,6 +84,18 @@ void Sensor::update()
   convert();
   check_thresh();
   calc_priority();
+  if ( display_me )
+  {
+    if( (display_value < hi_thresh) || (display_value > lo_thresh ) )
+    {
+      millis();
+      millis();
+      millis();
+      millis();
+      millis();
+      display_me = false;
+    }
+  }
 }
 
 void Sensor::calc_priority()
@@ -104,17 +105,45 @@ void Sensor::calc_priority()
   }
   if( display_value > hi_thresh){
     priority = abs( display_value - hi_thresh) / abs(hi_bound - hi_thresh) + priority_offset;
+    /*
+        r_color = 31;
+        g_color = 63*(1-priority);
+        b_color = 31*(1-priority);
+        ///< from white to red
+    */
+        r_color = 31;
+        g_color = 63*(1-priority);
+        b_color = 0;
+        ///< from yellow to red. aka different shades of orange
   }
   else if ( display_value < lo_thresh)
   {
     priority = abs(lo_thresh - display_value) / abs(lo_thresh - lo_bound) + priority_offset;
+/*
+    r_color = 31;
+    g_color = 63*(1-priority);
+    b_color = 31*(1-priority);
+    ///< from white to red
+*/
+    r_color = 31;
+    g_color = 63*(1-priority);
+    b_color = 0;
+    ///< from yellow to red. aka different shades of orange
   }
   else if ( display_value > mid_hi)
   {
     priority = abs( display_value - mid_hi) / abs(hi_bound - mid_hi) + priority_offset;
+    r_color = 31;
+    g_color = 63;
+    b_color = 31*(1-priority);
+    ///< from white to yellow
   }
   else ( display_value < mid_lo)
   {
     priority = abs(mid_lo - display_value) / abs(mid_lo - lo_bound) + priority_offset;
+    r_color = 31;
+    g_color = 63;
+    b_color = 31*(1-priority);
+    ///< from white to yellow
   }
 }

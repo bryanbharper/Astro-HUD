@@ -110,7 +110,7 @@ void loop() {
       }
       // Display sensor name and value
       oled.setCursor( sensor_x, priority_y[i] );
-      text_color = rgbTo16( 31, 63*(1-sensors[i].priority), 31*(1-sensors[i].priority));
+      text_color = rgbTo16( sensors[i].r_color, sensors[i].g_color, sensors[i].b_color);
       oled.setTextColor( text_color );
       oled.print( sensors[i].display_name );
       sensors[i].last_display_value_x = oled.getCursorX();
