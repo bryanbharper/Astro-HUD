@@ -1,5 +1,0 @@
-Sensor	KEYWORD1
-update	KEYWORD2
-check_thresh  KEYWORD2
-convert KEYWORD2
-calc_priority  KEYWORD2
