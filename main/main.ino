@@ -1,13 +1,18 @@
-#include <Clock.h>
-
 /*************************************
 * SSD1351  Pin Assignments
 *************************************/
-#define sclk 2
-#define mosi 3
-#define dc   4
+//#define sclk 2
+//#define mosi 3
+//#define dc   4
+//#define cs   5
+//#define rst  6
+
+#define sclk 13
+#define mosi 11
 #define cs   5
 #define rst  6
+#define dc   4
+
 
 /*************************************
 * Color Definitions
@@ -29,11 +34,13 @@
 #include <Sensor.h>
 #include <Helpers.h>
 #include <Clock.h>
+#include <SPI.h>
 
 /*************************************
 * Sensor Objects
 *************************************/
-Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
+// Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);
+Adafruit_SSD1351 oled = Adafruit_SSD1351(cs, dc, rst);
 const int num_sensors = 3;
 Sensor sensors[num_sensors] = {
                       Sensor("Ox: ", A0, 90, 50, 100, 0, 100.0 / 1023.0, 0),
