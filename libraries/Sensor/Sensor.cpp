@@ -27,8 +27,8 @@ Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_
     last_display_value_x = 0;
     last_display_value_y = 0;
     last_display_value = 0;
-    *priority_count++;
-    priority_y=16(*priority_count);
+    priority_count++;
+    priority_y=16*(priority_count);
 }
 
 Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound,
@@ -56,8 +56,8 @@ Sensor::Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_
     last_display_value_x = 0;
     last_display_value_y = 0;
     last_display_value = 0;
-    *priority_count++;
-    priority_y=16(*priority_count);
+    priority_count++;
+    priority_y=16*(priority_count);
 
 }
 
@@ -110,7 +110,7 @@ void Sensor::calc_priority()
     priority = abs( display_value - hi_thresh) / abs(hi_bound - hi_thresh) + priority_offset;
     r_color = 31;
     g_color = 63*(1-priority);
-    b_color = 31*(1-priority);
+    b_color = 0;
     ///< from yellow to red. aka different shades of orange
   }
   else if ( display_value < lo_thresh)
@@ -118,23 +118,23 @@ void Sensor::calc_priority()
     priority = abs(lo_thresh - display_value) / abs(lo_thresh - lo_bound) + priority_offset;
     r_color = 31;
     g_color = 63*(1-priority);
-    b_color = 31*(1-priority);
+    b_color = 0;
     ///< from yellow to red. aka different shades of orange
   }
   else if ( display_value > mid_hi)
   {
     priority = abs( display_value - mid_hi) / abs(hi_bound - mid_hi) + priority_offset;
-    r_color = 31;
+    r_color = 31*(1-priority);
     g_color = 63;
     b_color = 31*(1-priority);
-    ///< from white to yellow
+    ///< from white to green
   }
-  else ( display_value < mid_lo)
+  else
   {
     priority = abs(mid_lo - display_value) / abs(mid_lo - lo_bound) + priority_offset;
-    r_color = 31;
+    r_color = 31*(1-priority);
     g_color = 63;
     b_color = 31*(1-priority);
-    ///< from white to yellow
+    ///< from white to green
   }
 }

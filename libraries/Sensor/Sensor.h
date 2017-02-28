@@ -52,7 +52,7 @@ class Sensor
            float Conv_coef, float Conv_offset);
 
     Sensor(String name, int Pin, float Hi_thresh, float Lo_thresh, float Hi_bound, float Lo_bound,
-            float Conv_coef, float Conv_offset, floar Priority_offset);
+            float Conv_coef, float Conv_offset, float Priority_offset);
             ///< if a priority_offset is needed for a sensor
 
     Sensor();
@@ -115,7 +115,7 @@ class Sensor
 
       unsigned short int priority_y;  ///<positions sensor base off priority after priority_sort in Helpers
 
-      int * priority_count=1; ///< counter for the initial sensor position
+      int priority_count=1; ///< counter for the initial sensor position
 
       bool display_me;  ///< A bollean used to determine whether or not a sensor should be
                         ///< displayed at any given moment. Sensor values are not always on
