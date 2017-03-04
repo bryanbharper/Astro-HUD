@@ -1,11 +1,8 @@
-#! python3
-
 #####################
-#   Import Modules
+#    Modules
 ######################
-import sys
-import math
+from lib import sensors
 
-from lib import example_module.py
+test = sensors.Sensor("Bob", 0, 1, 2, 3, 4, 5, 6)
 
-print('Hello world!')
+print test.name
