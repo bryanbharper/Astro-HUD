@@ -3,6 +3,7 @@
 ######################
 from lib import sensors
 
-test = sensors.Sensor("Bob", 0, 1, 2, 3, 4, 5, 6)
+sensor_array = sensors.get_sensors()
 
-print test.name
+for sensor in sensor_array:
+    print sensor.name
