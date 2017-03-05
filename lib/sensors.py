@@ -5,15 +5,15 @@ For each hardware sensor connected to the HUD system a Sensor object must be ins
 This object is used to handle all actions pertaining to the hardware sensor.
 
 From the point of view of the microcontroller running the HUD system code, a hardware sensor
-is simply a voltage on one of the GPIO pins. For the voltage to be converted into meaningful
+is simply a voltage on one of the ADC channels. For the voltage to be converted into meaningful
 data, it is necessary to keep track of information about the hardware sensor and tie that
-information to the value read on the given GPIO pin. For example, in order for a voltage to
+information to the value read on the given ADC channels. For example, in order for a voltage to
 represent a given physical parameter, it is necessary to know the conversion formula from volts
 to the desired physical units. It is assumed that the conversion formula is linear.
 
 An instantiated Sensor object keeps track of all necessary sensor properties, such as the
 sensor's name, units, conersion factors, current and previous values, etc.. It also has methods
-for performing various sensor related actions, such as reading a voltage off of a pin, converting
+for performing various sensor related actions, such as reading a voltage from an ADC channel, converting
 that value into the specified units, and updating the sensors priority based on external
 information.
 
@@ -41,12 +41,12 @@ class Sensor(object):
      default values (generally zero).
     """
 
-    def __init__(self, name, pin, hi_thresh, lo_thresh, hi_bound, lo_bound, conv_coef, conv_offset):
+    def __init__(self, name, channel, hi_thresh, lo_thresh, hi_bound, lo_bound, conv_coef, conv_offset):
         # name of the sensor (used on the HUD).
         self.name = name
 
-        # Address of the hardware pin to which this sensor is attached.
-        self.pin = pin
+        # Address of the ADC channel to which this sensor is attached.
+        self.channel = channel
 
         # High Threshold: The upper sensor value at which sensor will begin to get displayed.
         self.hi_thresh = hi_thresh
@@ -72,7 +72,7 @@ class Sensor(object):
         # practical applications. conv_offset is the offset of the linear approximation.
         self.conv_offset = conv_offset
 
-        # Stores voltage read of the sensor's pin
+        # Stores voltage read of the sensor's channel
         self.sensor_read = 0
 
         # A boolean used to determine whether or not a sensor should be displayed at any given
@@ -119,13 +119,13 @@ def get_sensors():
     sensor_list = []
     for section in parser.sections():
         name = parser.get(section, "name")
-        pin = parser.get(section, "pin")
+        channel = parser.get(section, "channel")
         hi_bound = parser.get(section, "upper_bound")
         lo_bound = parser.get(section, "lower_bound")
         hi_thresh = parser.get(section, "upper_threshold")
         lo_thresh = parser.get(section, "lower_threshold")
         conv_coeff = parser.get(section, "conversion_coefficient")
         conv_offset = parser.get(section, "conversion_offset")
-        sensor_list.append( Sensor(name, pin, hi_thresh, lo_thresh, hi_bound, lo_bound, conv_coeff, conv_offset) )
+        sensor_list.append( Sensor(name, channel, hi_thresh, lo_thresh, hi_bound, lo_bound, conv_coeff, conv_offset) )
 
     return sensor_list
