@@ -27,7 +27,7 @@ used to define and utilize these HUD specific members.
 #       Dependencies
 ############################
 import ConfigParser
-import adc
+# import adc
 
 ############################
 #       Definition
@@ -105,8 +105,8 @@ class Sensor(object):
     Calling update will read the assigned pin value, then call convert, check_thresh,
     and calc_priority.
     """
-    def update():
-        self.sensor_read = adc.readVoltage(self.channel);
+    def update(voltage):
+        self.sensor_read = voltage #adc.readVoltage(self.channel)
         convert()
         check_thresh()
 
