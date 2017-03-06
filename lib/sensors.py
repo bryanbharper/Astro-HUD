@@ -27,6 +27,7 @@ used to define and utilize these HUD specific members.
 #       Dependencies
 ############################
 import ConfigParser
+import adc
 
 ############################
 #       Definition
@@ -98,6 +99,16 @@ class Sensor(object):
         else:
             self.display_me = False
 
+    """
+    Dynamically updates all sensor properties.
+
+    Calling update will read the assigned pin value, then call convert, check_thresh,
+    and calc_priority.
+    """
+    def update():
+        self.sensor_read = adc.readVoltage(self.channel);
+        convert()
+        check_thresh()
 
 ###################################
 #   Configuration File Functions

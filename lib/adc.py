@@ -31,10 +31,10 @@ def readVoltage(channel):
     # Configuration
     round_decimal_places = 4
     vref = 3.3 # MCP3208 Options: 5.0, 3.3, 1.0, 0.3 see datasheet
-    sample_rate = 4096
+    num_samples = 4096
     # Retreive data
     data = readChannel(channel)
     # Convert to volts (optionally round value)
-    voltage = (vref * data) / float(sample_rate)
+    voltage = (vref * data) / float(num_samples)
     voltage = round( voltage, round_decimal_places)
     return voltage

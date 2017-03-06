@@ -5,5 +5,6 @@ from lib import sensors
 
 sensor_array = sensors.get_sensors()
 
-for sensor in sensor_array:
-    print sensor.name
+while True:
+    sensor = sensor_array[0]
+    print '{}\t Voltage= {}\t Value={}'.format(sensor.name, sensor.sensor_read, sensor.display_value)
