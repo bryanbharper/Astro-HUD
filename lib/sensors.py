@@ -26,7 +26,7 @@ used to define and utilize these HUD specific members.
 ############################
 #       Dependencies
 ############################
-import ConfigParser
+import configparser
 # import adc
 
 ############################
@@ -105,10 +105,10 @@ class Sensor(object):
     Calling update will read the assigned pin value, then call convert, check_thresh,
     and calc_priority.
     """
-    def update(voltage):
+    def update(self, voltage):
         self.sensor_read = voltage #adc.readVoltage(self.channel)
-        convert()
-        check_thresh()
+        self.convert()
+        self.check_thresh()
 
 ###################################
 #   Configuration File Functions
@@ -118,7 +118,7 @@ def parse_sensors():
     Returns configuration object from sensors_config.ini.
     """
     file_address = 'config/sensors_config.ini' # Assume static file structure
-    parser = ConfigParser.ConfigParser()
+    parser = configparser.ConfigParser()
     parser.read(file_address)
     return parser
 
@@ -130,13 +130,13 @@ def get_sensors():
     sensor_list = []
     for section in parser.sections():
         name = parser.get(section, "name")
-        channel = parser.get(section, "channel")
-        hi_bound = parser.get(section, "upper_bound")
-        lo_bound = parser.get(section, "lower_bound")
-        hi_thresh = parser.get(section, "upper_threshold")
-        lo_thresh = parser.get(section, "lower_threshold")
-        conv_coeff = parser.get(section, "conversion_coefficient")
-        conv_offset = parser.get(section, "conversion_offset")
+        channel = int( parser.get(section, "channel") )
+        hi_bound = float( parser.get(section, "upper_bound") )
+        lo_bound = float( parser.get(section, "lower_bound") )
+        hi_thresh = float( parser.get(section, "upper_threshold") )
+        lo_thresh = float(  parser.get(section, "lower_threshold") )
+        conv_coeff = eval( parser.get(section, "conversion_coefficient") )
+        conv_offset = float( parser.get(section, "conversion_offset") )
         sensor_list.append( Sensor(name, channel, hi_thresh, lo_thresh, hi_bound, lo_bound, conv_coeff, conv_offset) )
 
     return sensor_list

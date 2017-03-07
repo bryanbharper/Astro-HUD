@@ -23,14 +23,14 @@ def readChannel(channel):
     transfer = spi.xfer2( [ 6 + ( (channel&4) >> 2 ), (channel&3) << 6, 0] )
     data = ( (transfer[1] & 15) << 8 ) + transfer[2]
     # Close spi bus
-    spi.close()
+    #spi.close()
     return data
 
 
 def readVoltage(channel):
     # Configuration
     round_decimal_places = 4
-    vref = 3.3 # MCP3208 Options: 5.0, 3.3, 1.0, 0.3 see datasheet
+    vref = 5.0 # MCP3208 Options: 5.0, 3.3, 1.0, 0.3 see datasheet
     num_samples = 4096
     # Retreive data
     data = readChannel(channel)
