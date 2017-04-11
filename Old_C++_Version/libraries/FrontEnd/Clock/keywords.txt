@@ -1,3 +1,0 @@
-speed -> (MHz) Processor speed variable to determine second length
-flash -> delay design specifically for your hardware speed
-time constraints -> define second, minutes, and hours
