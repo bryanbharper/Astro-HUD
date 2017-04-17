@@ -87,7 +87,7 @@ class Sensor(object):
     Converts sensor voltage into measured quantity's units.
     """
     def convert(self):
-        self.display_value =  self.conv_coef * self.sensor_read + self.conv_offset
+        self.display_value =  round(self.conv_coef * self.sensor_read + self.conv_offset, 2)
 
     """
     Determines whether sensor value is within defined threshold.

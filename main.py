@@ -61,7 +61,7 @@ class SensorHUD(Gtk.Window):
 
     def update_sensors(self):
         for i in range( len(self.sensors) ):
-            voltage = adc.readVoltage(sensor.channel)
+            voltage = adc.readVoltage( self.sensors[i].channel )
             self.sensors[i].update( voltage )
             self.sensor_value_labels[i].set_text( str(self.sensors[i].display_value) )
         return True  # must return true for timeout function to continue executing
