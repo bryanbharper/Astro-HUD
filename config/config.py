@@ -2,7 +2,7 @@ import configparser
 
 ##############################
 
-config = configparser.configparser()
+config = configparser.ConfigParser()
 
 #Default settings for the configfile
 config['DEFAULT']= {}
@@ -10,7 +10,7 @@ config['DEFAULT']= {}
 
 i_spy=config['settings']
 
-# i_spy sets libraries
+i_spy sets libraries
 i_spy['Clock']= {}
 i_spy['FrontEnd']= {}
 i_spy['Helpers']= {}
@@ -55,4 +55,4 @@ agent['conv_offset']= '0'
 # configfile is ayeScotty.ini
 # named after StarTrek
 with open('ayeScotty.ini', 'wb') as configfile:
-config.write(configfile)
+    config.write(configfile)
