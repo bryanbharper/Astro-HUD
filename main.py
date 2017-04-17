@@ -3,7 +3,7 @@
 ######################
 import random
 from lib import sensors
-#from lib import adc
+from lib import adc
 import gi
 from gi.repository import GLib
 gi.require_version('Gtk', '3.0')
