@@ -13,8 +13,9 @@ from gi.repository import Gtk
 
 # Define GUI Object
 class SensorHUD(Gtk.Window):
-    # Initialize parent
+    
     def __init__(self):
+        # Initialize parent
         Gtk.Window.__init__(self)
 
         # Give SensorGUI attribute storing
