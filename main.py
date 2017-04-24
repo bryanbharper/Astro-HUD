@@ -4,6 +4,7 @@
 import random
 from lib import sensors
 from lib import adc
+from lib import helpers
 import gi
 from gi.repository import GLib
 gi.require_version('Gtk', '3.0')
@@ -13,7 +14,7 @@ from gi.repository import Gtk
 
 # Define GUI Object
 class SensorHUD(Gtk.Window):
-    
+
     def __init__(self):
         # Initialize parent
         Gtk.Window.__init__(self)
@@ -23,7 +24,7 @@ class SensorHUD(Gtk.Window):
 
         # Set Window Position
         self.set_position(Gtk.WindowPosition.CENTER)
-    
+
         # Give SensorGUI attribute which stores information about sensors.
         self.sensors = []
 
@@ -67,15 +68,15 @@ class SensorHUD(Gtk.Window):
             self.sensors[i].update( voltage )
             self.sensor_value_labels[i].set_text( str(self.sensors[i].display_value) )
 
-            #Only display labels if value is outside threshold range. 
+            #Only display labels if value is outside threshold range.
             if(self.sensors[i].display_me):
                 self.sensor_name_labels[i].show()
                 self.sensor_value_labels[i].show()
-            
+
             else:
                 self.sensor_name_labels[i].hide()
                 self.sensor_value_labels[i].hide()
-        
+
         return True  # must return true for timeout function to continue executing
 
 
