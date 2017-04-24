@@ -83,6 +83,15 @@ class Sensor(object):
         # The sensor value converted into approriated units.
         self.display_value = 0
 
+        # Each sensor is dynamically assigned a priority score for descisions regarding
+        # when and how to display information
+        self.priority = 0
+
+        # Set to zero by default, this property is used to give a sensor and intrinsic
+        # priority (all other things being equal, the sensor with the highest ofset takes
+        # prescedence). 
+        self.priority_offset = 0
+
     """
     Converts sensor voltage into measured quantity's units.
     """
@@ -109,6 +118,20 @@ class Sensor(object):
         self.sensor_read = voltage #adc.readVoltage(self.channel)
         self.convert()
         self.check_thresh()
+        self.calc_priority()
+
+    """
+    Caling calc_priority calculates the priority.
+    """
+    def calc_priority(self):
+        if( (self.display_value < self.hi_thresh) and (self.display_value > self.lo_thresh) ):
+            self.priority = self.priority_offset
+        elif( self.display_value > self.hi_thresh ):
+            priority = abs( self.display_value - self.hi_thresh ) /abs( self.hi_bound - self.hi_thresh ) + self.priority_offset
+        else:
+            priority = abs( self.lo_thresh - self.display_value ) /abs( self.lo_thresh - self.lo_bound ) + self.priority_offset
+        
+        
 
 ###################################
 #   Configuration File Functions
