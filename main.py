@@ -60,6 +60,16 @@ class SensorHUD(Gtk.Window):
             voltage = adc.readVoltage( self.sensors[i].channel )
             self.sensors[i].update( voltage )
             self.sensor_value_labels[i].set_text( str(self.sensors[i].display_value) )
+
+            #Only display labels if value is outside threshold range. 
+            if(self.sensors[i].display_me):
+                self.sensor_name_labels[i].show()
+                self.sensor_value_labels[i].show()
+            
+            else:
+                self.sensor_name_labels[i].hide()
+                self.sensor_value_labels[i].hide()
+        
         return True  # must return true for timeout function to continue executing
 
 
