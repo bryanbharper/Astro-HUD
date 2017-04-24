@@ -51,7 +51,7 @@ class SensorHUD(Gtk.Window):
             name_tag = self.sensors[i].name  + ":"
             self.sensor_name_labels.append( Gtk.Label( name_tag ) )
             self.sensor_value_labels.append( Gtk.Label( self.sensors[i].display_value ) )
-
+            
             # Set alignment for each labels
             self.sensor_name_labels[i].set_alignment(xalign=0.0, yalign=0.5) # Left Align
             self.sensor_value_labels[i].set_alignment(xalign=1.0, yalign=0.5) # Right align
@@ -66,7 +66,7 @@ class SensorHUD(Gtk.Window):
         for i in range( len(self.sensors) ):
             voltage = adc.readVoltage( self.sensors[i].channel )
             self.sensors[i].update( voltage )
-            self.sensor_value_labels[i].set_markup( "<span color='#427df4'>" + str(self.sensors[i].display_value) + "</span>" )
+            self.sensor_value_labels[i].set_markup("<span color='"+helpers.rgbToHex(255*self.sensors[i].priority,0,0)+"'>" + str(self.sensors[i].display_value) + "</span>" )
 
             #Only display labels if value is outside threshold range.
             if(self.sensors[i].display_me):
