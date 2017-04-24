@@ -18,7 +18,7 @@ class SensorHUD(Gtk.Window):
         # Initialize parent
         Gtk.Window.__init__(self)
 
-        # Give SensorGUI attribute storing
+        # Give SensorGUI attribute which stores information about sensors.
         self.sensors = []
 
         # Create attributes to track the sensor name and value labels
