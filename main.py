@@ -10,11 +10,6 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
-#sensor = sensor_array[0]
-#while True:
-#    sensor.update( adc.readVoltage(sensor.channel) )
-#    print("{}\t Voltage= {}\t Value={}".format(sensor.name, sensor.sensor_read, sensor.display_value))
-
 
 # Define GUI Object
 class SensorHUD(Gtk.Window):
