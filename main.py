@@ -18,6 +18,12 @@ class SensorHUD(Gtk.Window):
         # Initialize parent
         Gtk.Window.__init__(self)
 
+        # Set Window size
+        self.set_size_request(150,150)
+
+        # Set Window Position
+        self.set_position(Gtk.WindowPosition.CENTER)
+    
         # Give SensorGUI attribute which stores information about sensors.
         self.sensors = []
 
