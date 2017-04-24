@@ -65,7 +65,7 @@ class SensorHUD(Gtk.Window):
         for i in range( len(self.sensors) ):
             voltage = adc.readVoltage( self.sensors[i].channel )
             self.sensors[i].update( voltage )
-            self.sensor_value_labels[i].set_text( str(self.sensors[i].display_value) )
+            self.sensor_value_labels[i].set_markup( "<span color='#427df4'>" + str(self.sensors[i].display_value) + "</span>" )
 
             #Only display labels if value is outside threshold range. 
             if(self.sensors[i].display_me):
